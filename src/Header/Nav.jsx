@@ -1,52 +1,56 @@
-import { useState } from 'react'
-import { Menu, X } from 'lucide-react'
-import {NavLink} from "react-router-dom"
+import { useState } from 'react';
+import { Menu, X } from 'lucide-react';
+import { NavLink } from 'react-router-dom';
 import { HashLink as Link } from 'react-router-hash-link';
-import logo from "../assets/logo.jpg"
+import logo from "../assets/logo.jpg";
 
 export default function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-white text-black">
+    <nav className="bg-white text-black shadow-lg">
       <div className="container mx-auto px-4">
-
         <div className="flex justify-between items-center py-4">
-        <NavLink to="/">
-        <img src={logo} style={{height:"35px"}}/>
-        </NavLink>
-        <NavLink to="/" >
-          <div className="text-2xl font-bold mr-80 ml-0 pl-0 pr-16 hover:text-yellow-500">FitnessPro Gym</div>
+          {/* Logo */}
+          <NavLink to="/">
+            <img src={logo} style={{ height: "35px" }} alt="Logo" />
           </NavLink>
+
+          {/* Site Title */}
+          <NavLink to="/" className="hidden md:block mr-80 pr-10">
+            <div className="text-2xl font-bold hover:text-yellow-500">FitnessPro Gym</div>
+          </NavLink>
+
+          {/* Menu Links - Hidden on mobile, shown on larger screens */}
           <div className="hidden md:flex space-x-12 font-semibold">
-          <NavLink>
-            <div className="cursor-pointer hover:text-yellow-300 transition duration-300">Home</div>
+            <NavLink to="/">
+              <div className="cursor-pointer hover:text-yellow-300 transition duration-300">Home</div>
             </NavLink>
 
             <NavLink to="/About">
-            <div className="cursor-pointer hover:text-yellow-300 transition duration-300">About</div>
+              <div className="cursor-pointer hover:text-yellow-300 transition duration-300">About</div>
             </NavLink>
 
-           
-            <div className="cursor-pointer hover:text-yellow-300 transition duration-300">
-            <Link smooth to="/#classes" >Classes</Link></div>
-            
+            <Link smooth to="/#classes">
+              <div className="cursor-pointer hover:text-yellow-300 transition duration-300">Classes</div>
+            </Link>
 
-            
-            <div className="cursor-pointer hover:text-yellow-300 transition duration-300">
-            <Link smooth to="/#trainers">Trainers</Link></div>
-            
+            <Link smooth to="/#trainers">
+              <div className="cursor-pointer hover:text-yellow-300 transition duration-300">Trainers</div>
+            </Link>
 
             <NavLink to="/member">
-            <div className="cursor-pointer hover:text-yellow-300 transition duration-300">Membership</div>
+              <div className="cursor-pointer hover:text-yellow-300 transition duration-300">Membership</div>
             </NavLink>
 
             <NavLink to="/contact">
-            <div className="cursor-pointer hover:text-yellow-300 transition duration-300">Contact</div>
+              <div className="cursor-pointer hover:text-yellow-300 transition duration-300">Contact</div>
             </NavLink>
           </div>
+
+          {/* Hamburger Icon - Shown on mobile */}
           <button
-            className="md:hidden"
+            className="md:hidden flex items-center"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? (
@@ -57,47 +61,37 @@ export default function Navbar() {
           </button>
         </div>
       </div>
+
+      {/* Mobile Menu - Shown when Hamburger Icon is clicked */}
       {isMenuOpen && (
-        <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <NavLink>
-            <div className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700 transition duration-300 cursor-pointer" onClick={() => setIsMenuOpen(false)}>
-              Home
-            </div>
+        <div className="md:hidden bg-white shadow-md">
+          <div className="space-y-4 py-4">
+            <NavLink to="/" onClick={() => setIsMenuOpen(false)}>
+              <div className="block px-4 py-2 text-base font-medium hover:bg-gray-100">Home</div>
             </NavLink>
 
-            <NavLink to="/About">
-            <div className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700 transition duration-300 cursor-pointer" onClick={() => setIsMenuOpen(false)}>
-              About
-            </div>
+            <NavLink to="/About" onClick={() => setIsMenuOpen(false)}>
+              <div className="block px-4 py-2 text-base font-medium hover:bg-gray-100">About</div>
             </NavLink>
 
-            <NavLink>
-            <div className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700 transition duration-300 cursor-pointer" onClick={() => setIsMenuOpen(false)}>
-              Classes
-            </div>
+            <Link smooth to="/#classes" onClick={() => setIsMenuOpen(false)}>
+              <div className="block px-4 py-2 text-base font-medium hover:bg-gray-100">Classes</div>
+            </Link>
+
+            <Link smooth to="/#trainers" onClick={() => setIsMenuOpen(false)}>
+              <div className="block px-4 py-2 text-base font-medium hover:bg-gray-100">Trainers</div>
+            </Link>
+
+            <NavLink to="/member" onClick={() => setIsMenuOpen(false)}>
+              <div className="block px-4 py-2 text-base font-medium hover:bg-gray-100">Membership</div>
             </NavLink>
 
-            <NavLink>
-            <div className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700 transition duration-300 cursor-pointer" onClick={() => setIsMenuOpen(false)}>
-              Trainers
-            </div>
-            </NavLink>
-
-            <NavLink>
-            <div className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700 transition duration-300 cursor-pointer" onClick={() => setIsMenuOpen(false)}>
-              Membership
-            </div>
-            </NavLink>
-
-            <NavLink>
-            <div className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700 transition duration-300 cursor-pointer" onClick={() => setIsMenuOpen(false)}>
-              Contact
-            </div>
+            <NavLink to="/contact" onClick={() => setIsMenuOpen(false)}>
+              <div className="block px-4 py-2 text-base font-medium hover:bg-gray-100">Contact</div>
             </NavLink>
           </div>
         </div>
       )}
     </nav>
-  )
+  );
 }
